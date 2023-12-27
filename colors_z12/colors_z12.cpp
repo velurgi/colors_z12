@@ -75,8 +75,8 @@ int dataCheckInt(int integer) { //Проверка на int
 	return integer;
 }
 
-int randFunction() {
-	int x = rand() % 8 + 1;
+int randFunction(int maxValue) {
+	int x = rand() % (maxValue) + 1;
 	return x;
 }
 
@@ -122,18 +122,23 @@ int main()
 	std::cin >> colums;
 	colums = dataCheckInt(colums);
 
-	std::vector <std::vector<int>> matrix;
+	std::cout << "Введите максимальное значение: " << std::endl;
+	int maxValue = 0;
+	std::cin >> maxValue;
+	maxValue = dataCheckInt(maxValue);
+
+		std::vector <std::vector<int>> matrix;
 
 	//Заполнение случайными числами
 	for (int i = 0; i < rows; i++) {
 		std::vector <int> row;
 		for (int j = 0; j < colums; j++) {
-			row.push_back(randFunction());
+			row.push_back(randFunction(maxValue));
 		}
 		matrix.push_back(row);
 	}
 	std::vector <int> maxNum;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < maxValue+1; i++) {
 		maxNum.push_back(0);
 	}
 	//Не поверите, вывод
@@ -159,7 +164,7 @@ int main()
 
 
 	
-	for (int i = 0; i < maxNum.size(); i++) {
+	for (int i = 0; i < maxNum.size()-1; i++) {
 		std::cout << i+1 << ". " << maxNum[i]<<std::endl;
 	}
 
